@@ -1,5 +1,6 @@
 import { Link } from "@remix-run/react";
 import Image from "remix-image";
+import Button from "~/components/Button";
 import { Frame } from "~/components/Frame";
 import { Logo } from "~/components/Logo";
 
@@ -36,7 +37,9 @@ export default function Index() {
         <Frame className="z-10 mx-10 -mt-20 self-center justify-self-start rounded-sm bg-base-100 md:mt-0 md:-ml-20 md:mr-20">
           <div className="flex flex-col items-center gap-4 p-8 text-center">
             {TITLE}
-            <Link to="/login">GET STARTED</Link>
+            <Link to="/login">
+              <Button>GET STARTED</Button>
+            </Link>
           </div>
         </Frame>
       </div>
