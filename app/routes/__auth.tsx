@@ -10,7 +10,6 @@ const AuthLayout = (): JSX.Element => {
         <Logo />
         <Frame className="z-10 bg-base-100 p-8">
           <Outlet />
-          nnnnnnnnn
         </Frame>
       </div>
       <Frame className="relative z-0 -mt-20 h-full flex-1 lg:mt-0">

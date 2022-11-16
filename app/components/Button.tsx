@@ -12,6 +12,8 @@ interface Props extends HasChildren, HasClassName {
     | "warning"
     | "info";
   onClick?: () => void;
+  type?: "button" | "submit";
+  isDisabled?: boolean;
 }
 
 const VARIANTS = {
@@ -41,9 +43,13 @@ const Button = ({
   size = "normal",
   variant = "normal",
   color,
+  type = "submit",
+  isDisabled,
 }: Props) => {
   return (
     <button
+      disabled={isDisabled}
+      type={type}
       onClick={onClick}
       className={`btn flex items-center justify-center ${
         color && COLORS[color]
