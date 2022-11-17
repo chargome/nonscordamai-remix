@@ -1,22 +1,27 @@
-import type { LoaderFunction } from "@remix-run/node";
-import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
-import { getClient } from "~/lib/supabase";
+import { Link } from "@remix-run/react";
+import type { User } from "@supabase/supabase-js";
+import Button from "~/components/Button";
+import EntryStats from "~/components/EntryStats";
+import { ADD_ENTRY, AUTHENTICATED_WRAPPER } from "~/constants/routes";
+import { useRouteData } from "~/hooks/useRouteData";
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const response = new Response();
-  const supabaseClient = getClient(request, response);
-  const session = await supabaseClient.auth.getSession();
-  return json({ session });
-};
+interface LoaderData {
+  user: User;
+}
 
 const DashboardPage = () => {
-  const { session } = useLoaderData();
+  const user = useRouteData<LoaderData>(AUTHENTICATED_WRAPPER);
+
   return (
-    <>
-      <div>DASHBOARD</div>
-      <pre>{JSON.stringify(session)}</pre>
-    </>
+    <div className="flex min-h-screen flex-col items-center gap-8 py-20">
+      <h1 className="pb-10 text-5xl font-bold">
+        Hello, {user?.user.user_metadata.name}
+      </h1>
+      <EntryStats />
+      <Link to={ADD_ENTRY}>
+        <Button>CREATE A NEW ENTRY</Button>
+      </Link>
+    </div>
   );
 };
 
