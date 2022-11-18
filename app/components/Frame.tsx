@@ -1,4 +1,4 @@
-import type { HasChildren } from "~/types/common";
+import type { HasChildren } from "~/types/ui";
 
 interface Props extends HasChildren {
   className?: string;
