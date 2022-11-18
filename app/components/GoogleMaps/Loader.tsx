@@ -2,9 +2,13 @@ import { useLoadScript } from "@react-google-maps/api";
 import type { HasChildren } from "~/types/ui";
 import { LoadingIndicator } from "../LoadingIndicator";
 
-const Loader = ({ children }: HasChildren) => {
+interface Props extends HasChildren {
+  googleKey: string;
+}
+
+const Loader = ({ children, googleKey }: Props) => {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyDVEQkYxtSX5-5tnzyrvSv28OuHGSI4UFw", // todo: use env
+    googleMapsApiKey: googleKey,
     libraries: ["places"],
   });
 

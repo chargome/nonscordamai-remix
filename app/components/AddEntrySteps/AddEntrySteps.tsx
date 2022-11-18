@@ -4,6 +4,10 @@ import EntryForm from "./EntryForm";
 import LocationPicker from "./LocationPicker";
 import ReviewAndPublish from "./ReviewAndPublish";
 
+interface Props {
+  googleKey: string;
+}
+
 const STEPS = [
   {
     name: "Location",
@@ -19,7 +23,7 @@ const STEPS = [
   },
 ];
 
-const AddEntrySteps = () => {
+const AddEntrySteps = ({ googleKey }: Props) => {
   const [currentStep, setCurrentStep] = useState(0);
 
   const nextStep = () => {
@@ -49,7 +53,7 @@ const AddEntrySteps = () => {
       </div>
       <div className=" flex w-full justify-center">
         {currentStep === 0 && (
-          <Loader>
+          <Loader googleKey={googleKey}>
             <LocationPicker nextStep={nextStep} />
           </Loader>
         )}
