@@ -11,7 +11,8 @@ const UserAvatar = ({ user }: Props) => {
       <div className="relative h-24 w-24">
         <div className="avatar absolute z-10 h-24 w-24">
           <div className="mask mask-hexagon relative w-24">
-            <Image
+            <img
+              referrerPolicy="no-referrer"
               src={user.user_metadata.avatar_url || "/images/pizzaiolo.webp"}
               alt="user"
             />

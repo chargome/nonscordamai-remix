@@ -9,7 +9,7 @@ const Card = ({ title, children, className }: Props) => {
     <div className={`${className} card bg-base-300`}>
       <div className="card-body">
         <div className="card-title">{title}</div>
-        <div className="prose m-auto w-full rounded bg-base-200 p-4 shadow-sm">
+        <div className="prose m-auto w-full rounded bg-base-100 p-4 shadow-sm">
           {children}
         </div>
       </div>

@@ -93,7 +93,7 @@ const TextEditor = ({ onSave, initialData, readOnly, btnLabel }: Props) => {
 
   return (
     <div className="flex w-full flex-col gap-4">
-      <Card>
+      <Card title="💭 Thoughts">
         <div id="editor" className="min-h-[500px]" />
       </Card>
       {onSave && <Button onClick={save}>{btnLabel}</Button>}
