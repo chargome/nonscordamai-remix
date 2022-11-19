@@ -1,4 +1,4 @@
-import type { Location } from "~/types/location";
+import type { EntryLocation } from "~/types/entry";
 import Button from "./Button";
 import LocationSearchbar from "./GoogleMaps/LocationSearchbar";
 import { Icons } from "./Icons";
@@ -8,8 +8,8 @@ interface Props {
   confirmLocation: () => void;
   cancelLocation: () => void;
   loading: boolean;
-  updateLocation: (location: Location) => void;
-  selectedLocation?: Location;
+  updateLocation: (location: EntryLocation) => void;
+  selectedLocation?: EntryLocation;
 }
 
 const LocationSearch = ({

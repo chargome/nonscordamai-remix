@@ -1,8 +1,8 @@
-import type { Location } from "~/types/location";
+import type { EntryLocation } from "~/types/entry";
 import Card from "./Card";
 
 interface Props {
-  location?: Location;
+  location?: EntryLocation;
 }
 
 const LocationDisplay = ({ location }: Props) => {

@@ -1,4 +1,6 @@
+import type { OutputData } from "@editorjs/editorjs";
 import { useState } from "react";
+import { EntryLocation } from "~/types/entry";
 import Loader from "../GoogleMaps/Loader";
 import EntryForm from "./EntryForm";
 import LocationPicker from "./LocationPicker";
@@ -6,6 +8,7 @@ import ReviewAndPublish from "./ReviewAndPublish";
 
 interface Props {
   googleKey: string;
+  saveEntry: (location: EntryLocation, data: OutputData) => void;
 }
 
 const STEPS = [
@@ -23,7 +26,7 @@ const STEPS = [
   },
 ];
 
-const AddEntrySteps = ({ googleKey }: Props) => {
+const AddEntrySteps = ({ googleKey, saveEntry }: Props) => {
   const [currentStep, setCurrentStep] = useState(0);
 
   const nextStep = () => {
@@ -60,7 +63,9 @@ const AddEntrySteps = ({ googleKey }: Props) => {
         {currentStep === 1 && (
           <EntryForm nextStep={nextStep} prevStep={prevStep} />
         )}
-        {currentStep === 2 && <ReviewAndPublish prevStep={prevStep} />}
+        {currentStep === 2 && (
+          <ReviewAndPublish prevStep={prevStep} saveEntry={saveEntry} />
+        )}
       </div>
     </div>
   );

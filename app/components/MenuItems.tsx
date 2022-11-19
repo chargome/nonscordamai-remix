@@ -1,14 +1,17 @@
+import { Link } from "@remix-run/react";
+import { ADD_ENTRY, DASHBOARD, MY_ENTRIES } from "~/constants/routes";
+
 const MenuItems = () => {
   return (
     <>
       <li>
-        <a>Menu Item 1</a>
+        <Link to={DASHBOARD}>Dashboard</Link>
       </li>
       <li>
-        <a>Menu Item 2</a>
+        <Link to={MY_ENTRIES}>My Entries</Link>
       </li>
       <li>
-        <a>Menu Item 2</a>
+        <Link to={ADD_ENTRY}>Add Entry</Link>
       </li>
     </>
   );

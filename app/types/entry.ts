@@ -1,8 +1,13 @@
 import type { OutputData } from "@editorjs/editorjs";
-import type { Location } from "./location";
+
+export interface EntryLocation {
+  address: string;
+  lat: number;
+  lng: number;
+}
 
 export interface Entry {
-  location: Location;
+  location: EntryLocation;
   data: OutputData;
 }
 

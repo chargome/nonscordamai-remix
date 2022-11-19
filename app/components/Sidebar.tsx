@@ -24,7 +24,7 @@ export const Sidebar = ({ children, user }: Props) => {
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay" />
-        <ul className="menu w-60 overflow-y-auto bg-base-200 p-4 text-base-content">
+        <ul className="menu w-60 gap-2 overflow-y-auto bg-base-200 p-4 text-base-content">
           <div className="flex justify-center pb-6">
             <UserAvatar user={user} />
           </div>

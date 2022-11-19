@@ -1,4 +1,4 @@
-import type { Location } from "~/types/location";
+import type { EntryLocation } from "~/types/entry";
 import { useGeolocation } from "~/hooks/useGeolocation";
 import { useAddEntryStore } from "~/store/AddEntry";
 import { useCallback, useEffect, useState } from "react";
@@ -18,7 +18,7 @@ const LocationPicker = ({ nextStep }: Props): JSX.Element => {
     state.setLocation,
   ]);
   const [selectedLocation, setSelectedLocation] = useState<
-    Location | undefined
+    EntryLocation | undefined
   >(locationCache);
   const [loading, setLoading] = useState(false);
 

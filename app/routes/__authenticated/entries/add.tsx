@@ -1,14 +1,16 @@
-import { OutputData } from "@editorjs/editorjs";
+import type { OutputData } from "@editorjs/editorjs";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData, useSubmit } from "@remix-run/react";
 import AddEntrySteps from "~/components/AddEntrySteps";
+import { MY_ENTRIES } from "~/constants/routes";
+import { getAuthenticatedUser } from "~/lib/auth/auth.service";
 import { addEntry } from "~/lib/entry/entry.service";
 import { getClient } from "~/lib/supabase";
 import { FORM_DATA_DATA, FORM_DATA_LOCATION } from "~/types/entry";
 import type { ActionDataError } from "~/types/error";
-import { Location } from "~/types/location";
+import type { EntryLocation } from "~/types/entry";
 
 type LoaderData = {
   googleKey: string;
@@ -17,23 +19,27 @@ type LoaderData = {
 export const action: ActionFunction = async ({ request }) => {
   const response = new Response();
   const formData = await request.formData();
+
+  // todo: add validation
   const location = JSON.parse(
     formData.get(FORM_DATA_LOCATION) as string
-  ) as Location;
+  ) as EntryLocation;
   const data = JSON.parse(formData.get(FORM_DATA_DATA) as string) as OutputData;
   const client = await getClient(request, response);
-  const {
-    data: { session },
-  } = await client.auth.getSession();
-  const res = await addEntry(
-    client,
-    { location, data },
-    session?.user.id || ""
-  );
-  console.log("res: ", res);
-  return redirect("/dashboard");
+  const user = await getAuthenticatedUser(client);
 
-  return json<ActionDataError>({ msg: "Something went wrong" });
+  if (!user) {
+    return redirect("/", 401);
+  }
+
+  const res = await addEntry(client, { location, data }, user.id);
+
+  if (res.error) {
+    return json<ActionDataError>({ msg: "Something went wrong" });
+  }
+
+  // success
+  return redirect(MY_ENTRIES);
 };
 
 export const loader: LoaderFunction = () => {
@@ -49,11 +55,19 @@ export const loader: LoaderFunction = () => {
 
 const AddEntryPage = () => {
   const data = useLoaderData<LoaderData>();
+  const submit = useSubmit();
+
+  const saveEntry = (location: EntryLocation, data: OutputData) => {
+    const formData = new FormData();
+    formData.append(FORM_DATA_LOCATION, JSON.stringify(location));
+    formData.append(FORM_DATA_DATA, JSON.stringify(data));
+    submit(formData, { method: "post" });
+  };
 
   return (
     <div className="py-10 px-10">
       <h1 className="pb-10 text-end text-xl">Create a new Entry</h1>
-      <AddEntrySteps googleKey={data.googleKey} />
+      <AddEntrySteps googleKey={data.googleKey} saveEntry={saveEntry} />
     </div>
   );
 };
