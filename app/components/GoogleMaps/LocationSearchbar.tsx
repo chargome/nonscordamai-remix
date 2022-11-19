@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -9,7 +10,6 @@ interface Props {
 
 const LocationSearchbar = ({ handleLocationClick }: Props) => {
   const {
-    ready,
     value,
     setValue,
     suggestions: { status, data },
