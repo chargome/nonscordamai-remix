@@ -1,6 +1,6 @@
 import type { OutputData } from "@editorjs/editorjs";
 import { useState } from "react";
-import { EntryLocation } from "~/types/entry";
+import type { EntryLocation } from "~/types/entry";
 import Loader from "../GoogleMaps/Loader";
 import EntryForm from "./EntryForm";
 import LocationPicker from "./LocationPicker";
