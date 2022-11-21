@@ -1,7 +1,7 @@
 import type { HasChildren, HasClassName } from "~/types/ui";
 
 interface Props extends HasChildren, HasClassName {
-  size?: "small" | "normal";
+  size?: "small" | "normal" | "large";
   variant?: "normal" | "icon";
   color?:
     | "primary"
@@ -10,6 +10,7 @@ interface Props extends HasChildren, HasClassName {
     | "success"
     | "error"
     | "warning"
+    | "ghost"
     | "info";
   onClick?: () => void;
   type?: "button" | "submit";
@@ -17,13 +18,14 @@ interface Props extends HasChildren, HasClassName {
 }
 
 const VARIANTS = {
-  normal: "border-2 border-black p-3 min-w-[140px]",
-  icon: "btn-circle btn-primary",
+  normal: "p-3 min-w-[140px]",
+  icon: "btn-circle",
 };
 
 const SIZES = {
-  small: "",
+  small: "btn-sm",
   normal: "",
+  large: "btn-lg",
 };
 
 const COLORS = {
@@ -34,6 +36,7 @@ const COLORS = {
   error: "btn-error",
   warning: "btn-warning",
   info: "btn-info",
+  ghost: "btn-ghost",
 };
 
 const Button = ({
@@ -51,7 +54,7 @@ const Button = ({
       disabled={isDisabled}
       type={type}
       onClick={onClick}
-      className={`btn flex items-center justify-center ${
+      className={`btn flex items-center justify-center gap-1 ${
         color && COLORS[color]
       } ${SIZES[size]} ${VARIANTS[variant]} ${className}`}
     >

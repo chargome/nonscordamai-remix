@@ -1,5 +1,4 @@
 import type { User } from "@supabase/supabase-js";
-import Image from "remix-image";
 
 interface Props {
   user: User;

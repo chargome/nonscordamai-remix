@@ -1,15 +1,19 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData, useTransition } from "@remix-run/react";
+import List from "~/components/List";
+import ListItem from "~/components/ListItem";
+import { LoadingIndicator } from "~/components/LoadingIndicator";
+import { MY_ENTRIES } from "~/constants/routes";
 import { getAuthenticatedUser } from "~/lib/auth/auth.service";
 import { getEntries } from "~/lib/entry/entry.service";
 import { getClient } from "~/lib/supabase";
 
-type MoviesResponse = Awaited<ReturnType<typeof getEntries>>;
+type EntriesResponse = Awaited<ReturnType<typeof getEntries>>;
 interface LoaderData {
   error: string;
-  data: MoviesResponse["data"];
+  data: EntriesResponse["data"];
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -36,13 +40,26 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 const EntriesPage = () => {
   const { error, data } = useLoaderData<LoaderData>();
+  const transition = useTransition();
+
+  if (transition.state === "loading") {
+    return <LoadingIndicator isFullScreen />;
+  }
 
   return (
-    <div>
+    <div className="p-4">
       {error && <div className="text-md text-center text-error">{error}</div>}
-      {data?.map((entry) => (
-        <div key={entry.id}>{entry.address}</div>
-      ))}
+      <List>
+        {data?.map((entry) => (
+          <Link key={entry.id} to={`${MY_ENTRIES}/${entry.id}`}>
+            <ListItem>
+              {`${new Date(entry.created_at).toLocaleString()}: 📍${
+                entry.address
+              }`}
+            </ListItem>
+          </Link>
+        ))}
+      </List>
     </div>
   );
 };

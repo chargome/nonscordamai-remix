@@ -4,8 +4,21 @@ import type { Entry } from "~/types/entry";
 export const getEntries = (client: SupabaseClient, userId: string) => {
   return client
     .from("entries")
-    .select("id, address, lat, lng, data")
+    .select("id, created_at, address, lat, lng, data")
     .filter("fk_user", "eq", userId);
+};
+
+export const getEntry = (
+  client: SupabaseClient,
+  userId: string,
+  entryId: string
+) => {
+  return client
+    .from("entries")
+    .select("*")
+    .eq("id", entryId)
+    .eq("fk_user", userId)
+    .limit(1);
 };
 
 export const addEntry = (

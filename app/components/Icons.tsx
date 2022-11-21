@@ -1,7 +1,13 @@
 import { AiOutlineGoogle, AiOutlineGithub } from "react-icons/ai";
 import { CgMenuLeft } from "react-icons/cg";
 import { GiPizzaSlice } from "react-icons/gi";
-import { FaMapMarkerAlt, FaMap, FaCheck, FaTimes } from "react-icons/fa";
+import {
+  FaMapMarkerAlt,
+  FaMap,
+  FaCheck,
+  FaTimes,
+  FaAngleLeft,
+} from "react-icons/fa";
 
 export const Icons = {
   Github: AiOutlineGithub,
@@ -12,4 +18,5 @@ export const Icons = {
   Location: FaMapMarkerAlt,
   Check: FaCheck,
   Cancel: FaTimes,
+  BackArrow: FaAngleLeft,
 };
