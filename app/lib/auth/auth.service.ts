@@ -6,3 +6,7 @@ export const getAuthenticatedUser = async (client: SupabaseClient) => {
   } = await client.auth.getSession();
   return session?.user;
 };
+
+export const signOut = async (client: SupabaseClient) => {
+  return client.auth.signOut();
+};
