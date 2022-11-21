@@ -2,10 +2,12 @@ import type { LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Link, useLoaderData, useTransition } from "@remix-run/react";
+import Button from "~/components/Button";
+import { Icons } from "~/components/Icons";
 import List from "~/components/List";
 import ListItem from "~/components/ListItem";
 import { LoadingIndicator } from "~/components/LoadingIndicator";
-import { MY_ENTRIES } from "~/constants/routes";
+import { ADD_ENTRY, MY_ENTRIES } from "~/constants/routes";
 import { getAuthenticatedUser } from "~/lib/auth/auth.service";
 import { getEntries } from "~/lib/entry/entry.service";
 import { getClient } from "~/lib/supabase";
@@ -60,6 +62,14 @@ const EntriesPage = () => {
           </Link>
         ))}
       </List>
+      <div className="flex justify-center py-6">
+        <Link to={ADD_ENTRY}>
+          <Button color="primary">
+            <Icons.Plus className="h-5 w-5" />
+            Add entry
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 };
