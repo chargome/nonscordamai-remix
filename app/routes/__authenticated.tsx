@@ -3,6 +3,7 @@ import { json, redirect } from "@remix-run/node";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import type { User } from "@supabase/supabase-js";
 import { Sidebar } from "~/components/Sidebar";
+import { getAuthenticatedUser } from "~/lib/auth/auth.service";
 import { getClient } from "~/lib/supabase";
 
 interface LoaderData {
@@ -12,18 +13,13 @@ interface LoaderData {
 export const loader: LoaderFunction = async ({ request }) => {
   const response = new Response();
   const client = getClient(request, response);
-  const {
-    data: { session },
-  } = await client.auth.getSession();
+  const user = await getAuthenticatedUser(client);
 
-  if (session?.user) {
-    return json<LoaderData>(
-      { user: session.user },
-      { headers: response.headers }
-    );
+  if (!user) {
+    return redirect("/login", 401);
   }
 
-  return redirect("/login", 401);
+  return json<LoaderData>({ user }, { headers: response.headers });
 };
 
 const AuthenticatedLayout = (): JSX.Element => {

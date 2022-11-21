@@ -1,4 +1,4 @@
-import type { ActionFunction } from "@remix-run/node";
+import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, useActionData, useTransition } from "@remix-run/react";
@@ -6,9 +6,22 @@ import Button from "~/components/Button";
 import { Icons } from "~/components/Icons";
 import { getClient } from "~/lib/supabase";
 import type { Provider } from "@supabase/supabase-js";
+import { getAuthenticatedUser } from "~/lib/auth/auth.service";
 
 type ActionData = {
   error?: string;
+};
+
+export const loader: LoaderFunction = async ({ request }) => {
+  const response = new Response();
+  const client = getClient(request, response);
+  const user = await getAuthenticatedUser(client);
+
+  if (user) {
+    return redirect("/dashboard");
+  }
+
+  return json({}, { headers: response.headers });
 };
 
 export const action: ActionFunction = async ({
