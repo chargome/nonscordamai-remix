@@ -1,8 +1,10 @@
-import { Map, Marker } from 'pigeon-maps';
+import { Map, Marker } from "pigeon-maps";
+import type { HasChildren } from "~/types/ui";
 
-interface Props {
-  lat?: number;
-  lng?: number;
+interface Props extends HasChildren {
+  center?: number[];
+  showCenterMarker?: boolean;
+  markers?: number[][];
   onClickLocation?: (lat: number, lng: number) => void;
 }
 
@@ -12,19 +14,36 @@ const DEFAULT_LOCATION = {
   lng: 14.26812,
 };
 
-const MapView = ({ lat, lng, onClickLocation = () => null }: Props) => {
+const MapView = ({
+  children,
+  center,
+  showCenterMarker,
+  onClickLocation = () => null,
+}: Props) => {
   return (
     <div className="h-[500px] w-full overflow-hidden rounded-lg">
       <Map
         boxClassname="grayscale"
         height={500}
-        center={[lat || DEFAULT_LOCATION.lat, lng || DEFAULT_LOCATION.lng]}
-        defaultZoom={11}
+        center={[
+          center ? center[0] : DEFAULT_LOCATION.lat,
+          center ? center[1] : DEFAULT_LOCATION.lng,
+        ]}
+        defaultZoom={5}
         onClick={({ latLng }) => {
           onClickLocation(latLng[0], latLng[1]);
         }}
       >
-        {lat && lng && <Marker width={50} anchor={[lat, lng]} />}
+        {showCenterMarker && (
+          <Marker
+            width={50}
+            anchor={[
+              center ? center[0] : DEFAULT_LOCATION.lat,
+              center ? center[1] : DEFAULT_LOCATION.lng,
+            ]}
+          />
+        )}
+        {children}
       </Map>
     </div>
   );

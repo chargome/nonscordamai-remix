@@ -54,7 +54,7 @@ const EntriesPage = () => {
   return (
     <div className="p-4 px-10">
       {error && <div className="text-md text-center text-error">{error}</div>}
-      <div className="flex justify-end">
+      <div className="flex justify-end pb-4">
         <div className="btn-group">
           <Button
             color={isListView ? "primary" : undefined}

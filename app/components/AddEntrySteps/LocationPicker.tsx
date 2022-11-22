@@ -70,8 +70,12 @@ const LocationPicker = ({ nextStep }: Props): JSX.Element => {
         }
       />
       <MapView
-        lat={selectedLocation?.lat}
-        lng={selectedLocation?.lng}
+        center={
+          selectedLocation && [selectedLocation.lat, selectedLocation.lng]
+        }
+        markers={
+          selectedLocation && [[selectedLocation.lat, selectedLocation.lng]]
+        }
         onClickLocation={updateLocation}
       />
     </div>
