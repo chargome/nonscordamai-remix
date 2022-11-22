@@ -1,5 +1,4 @@
-import type { OutputData } from "@editorjs/editorjs";
-import type { EntryLocation } from "~/types/entry";
+import type { EntryData, EntryLocation } from "~/types/entry";
 import { useTransition } from "@remix-run/react";
 import { useAddEntryStore } from "~/store/AddEntry";
 import Button from "../Button";
@@ -7,7 +6,7 @@ import LocationDisplay from "../LocationDisplay";
 import TextEditor from "../TextEditor";
 
 interface Props {
-  saveEntry: (location: EntryLocation, data: OutputData) => void;
+  saveEntry: (location: EntryLocation, data: EntryData) => void;
   prevStep: () => void;
   error?: string;
 }

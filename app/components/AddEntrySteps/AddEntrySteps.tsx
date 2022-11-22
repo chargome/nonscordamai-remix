@@ -1,6 +1,5 @@
-import type { OutputData } from "@editorjs/editorjs";
 import { useState } from "react";
-import type { EntryLocation } from "~/types/entry";
+import type { EntryData, EntryLocation } from "~/types/entry";
 import Loader from "../GoogleMaps/Loader";
 import EntryForm from "./EntryForm";
 import LocationPicker from "./LocationPicker";
@@ -8,7 +7,7 @@ import ReviewAndPublish from "./ReviewAndPublish";
 
 interface Props {
   googleKey: string;
-  saveEntry: (location: EntryLocation, data: OutputData) => void;
+  saveEntry: (location: EntryLocation, data: EntryData) => void;
 }
 
 const STEPS = [

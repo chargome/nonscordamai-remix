@@ -1,4 +1,3 @@
-import type { OutputData } from "@editorjs/editorjs";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
@@ -10,7 +9,7 @@ import { addEntry } from "~/lib/entry/entry.service";
 import { getClient } from "~/lib/supabase";
 import { FORM_DATA_DATA, FORM_DATA_LOCATION } from "~/types/entry";
 import type { ActionDataError } from "~/types/error";
-import type { EntryLocation } from "~/types/entry";
+import type { EntryLocation, EntryData } from "~/types/entry";
 
 type LoaderData = {
   googleKey: string;
@@ -24,7 +23,7 @@ export const action: ActionFunction = async ({ request }) => {
   const location = JSON.parse(
     formData.get(FORM_DATA_LOCATION) as string
   ) as EntryLocation;
-  const data = JSON.parse(formData.get(FORM_DATA_DATA) as string) as OutputData;
+  const data = JSON.parse(formData.get(FORM_DATA_DATA) as string) as EntryData;
   const client = await getClient(request, response);
   const user = await getAuthenticatedUser(client);
 
@@ -32,7 +31,7 @@ export const action: ActionFunction = async ({ request }) => {
     return redirect("/", 401);
   }
 
-  const res = await addEntry(client, { location, data }, user.id);
+  const res = await addEntry(client, data, location, user.id);
 
   if (res.error) {
     return json<ActionDataError>({ msg: "Something went wrong" });
@@ -57,7 +56,7 @@ const AddEntryPage = () => {
   const data = useLoaderData<LoaderData>();
   const submit = useSubmit();
 
-  const saveEntry = (location: EntryLocation, data: OutputData) => {
+  const saveEntry = (location: EntryLocation, data: EntryData) => {
     const formData = new FormData();
     formData.append(FORM_DATA_LOCATION, JSON.stringify(location));
     formData.append(FORM_DATA_DATA, JSON.stringify(data));

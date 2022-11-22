@@ -1,13 +1,14 @@
 import React from "react";
-import type { OutputBlockData, OutputData } from "@editorjs/editorjs";
+import type { OutputBlockData } from "@editorjs/editorjs";
 import type EditorJS from "@editorjs/editorjs";
 
 import Button from "./Button";
 import Card from "./Card";
+import type { EntryData } from "~/types/entry";
 
 interface Props {
   initialData?: OutputBlockData[];
-  onSave?: (data: OutputData) => void;
+  onSave?: (data: EntryData) => void;
   readOnly?: boolean;
   btnLabel?: string;
 }

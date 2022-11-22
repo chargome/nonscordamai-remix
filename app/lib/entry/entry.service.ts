@@ -1,5 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
-import type { Entry } from "~/types/entry";
+import type { EntryData, EntryLocation } from "~/types/entry";
 
 export const getEntries = (client: SupabaseClient, userId: string) => {
   return client
@@ -23,14 +23,15 @@ export const getEntry = (
 
 export const addEntry = (
   client: SupabaseClient,
-  entry: Entry,
+  data: EntryData,
+  location: EntryLocation,
   userId: string
 ) => {
   return client.from("entries").insert({
     fk_user: userId,
-    address: entry.location.address,
-    lat: entry.location.lat,
-    lng: entry.location.lng,
-    data: entry.data,
+    address: location.address,
+    lat: location.lat,
+    lng: location.lng,
+    data,
   });
 };

@@ -9,6 +9,7 @@ import {
   FaAngleLeft,
   FaPlus,
   FaSignOutAlt,
+  FaListUl,
 } from "react-icons/fa";
 
 export const Icons = {
@@ -23,4 +24,5 @@ export const Icons = {
   BackArrow: FaAngleLeft,
   Plus: FaPlus,
   SignOut: FaSignOutAlt,
+  List: FaListUl,
 };

@@ -1,13 +1,12 @@
 import create from "zustand";
-import type { OutputData } from "@editorjs/editorjs";
-import type { Location } from "~/types/location";
+import type { EntryLocation, EntryData } from "~/types/entry";
 
 interface AddEntryState {
-  location?: Location;
-  data: OutputData;
+  location?: EntryLocation;
+  data: EntryData;
   createdAt: Date;
-  setLocation: (location?: Location) => void;
-  setData: (data?: OutputData) => void;
+  setLocation: (location?: EntryLocation) => void;
+  setData: (data?: EntryData) => void;
   reset: () => void;
 }
 

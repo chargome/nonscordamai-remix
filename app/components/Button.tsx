@@ -18,7 +18,7 @@ interface Props extends HasChildren, HasClassName {
 }
 
 const VARIANTS = {
-  normal: "p-3 min-w-[140px]",
+  normal: "p-3 min-w-[100px]",
   icon: "btn-circle",
 };
 
