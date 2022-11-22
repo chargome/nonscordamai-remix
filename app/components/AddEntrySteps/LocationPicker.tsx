@@ -73,6 +73,7 @@ const LocationPicker = ({ nextStep }: Props): JSX.Element => {
         center={
           selectedLocation && [selectedLocation.lat, selectedLocation.lng]
         }
+        showCenterMarker
         markers={
           selectedLocation && [[selectedLocation.lat, selectedLocation.lng]]
         }
