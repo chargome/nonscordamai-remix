@@ -1,5 +1,5 @@
 import type { OutputData } from "@editorjs/editorjs";
-import type { getEntries } from "~/lib/entry/entry.service";
+import type { getEntries, getEntry } from "~/lib/entry/entry.service";
 
 export interface EntryLocation {
   address: string;
@@ -18,6 +18,9 @@ export interface Entry {
 
 export type EntriesResponse = Awaited<ReturnType<typeof getEntries>>;
 export type EntriesResponseData = EntriesResponse["data"];
+
+export type EntryResponse = Awaited<ReturnType<typeof getEntry>>;
+export type EntryResponseData = EntryResponse["data"];
 
 export const FORM_DATA_LOCATION = "location";
 export const FORM_DATA_DATA = "data";

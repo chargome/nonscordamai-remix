@@ -10,7 +10,7 @@ import { LoadingIndicator } from "~/components/LoadingIndicator";
 import { ADD_ENTRY } from "~/constants/routes";
 import { getAuthenticatedUser } from "~/lib/auth/auth.service";
 import { getEntries } from "~/lib/entry/entry.service";
-import { parseEntryResponse } from "~/lib/entry/entry.util";
+import { parseEntriesResponse } from "~/lib/entry/entry.util";
 import { getClient } from "~/lib/supabase";
 import type { EntriesResponseData } from "~/types/entry";
 
@@ -43,7 +43,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 const EntriesPage = () => {
   const { error, data } = useLoaderData<LoaderData>();
-  const parsedEntries = parseEntryResponse(data as EntriesResponseData);
+  const parsedEntries = parseEntriesResponse(data as EntriesResponseData);
   const transition = useTransition();
   const [isListView, setIsListView] = useState(true);
 

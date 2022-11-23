@@ -15,10 +15,11 @@ export const getEntry = (
 ) => {
   return client
     .from("entries")
-    .select("*")
+    .select("id, created_at, address, lat, lng, data")
     .eq("id", entryId)
     .eq("fk_user", userId)
-    .limit(1);
+    .limit(1)
+    .single();
 };
 
 export const addEntry = (
