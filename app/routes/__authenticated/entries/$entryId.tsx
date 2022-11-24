@@ -1,7 +1,12 @@
-import type { LoaderFunction } from "@remix-run/node";
+import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { Link, useLoaderData, useTransition } from "@remix-run/react";
+import {
+  Link,
+  useLoaderData,
+  useSubmit,
+  useTransition,
+} from "@remix-run/react";
 import Button from "~/components/Button";
 import Card from "~/components/Card";
 import { Icons } from "~/components/Icons";
@@ -10,7 +15,7 @@ import LocationDisplay from "~/components/LocationDisplay";
 import TextEditor from "~/components/TextEditor";
 import { MY_ENTRIES } from "~/constants/routes";
 import { getAuthenticatedUser } from "~/lib/auth/auth.service";
-import { getEntry } from "~/lib/entry/entry.service";
+import { deleteEntry, getEntry } from "~/lib/entry/entry.service";
 import { parseEntryResponse } from "~/lib/entry/entry.util";
 import { getClient } from "~/lib/supabase";
 import type { EntryResponseData } from "~/types/entry";
@@ -46,9 +51,23 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   return json<LoaderData>({ data: entry.data }, { headers: response.headers });
 };
 
+export const action: ActionFunction = async ({ request, params }) => {
+  const response = new Response();
+  const postId = params.entryId;
+
+  if (request.method === "DELETE" && postId) {
+    const client = await getClient(request, response);
+    await deleteEntry(client, postId);
+    return redirect(MY_ENTRIES);
+  }
+
+  return json({}, { headers: response.headers });
+};
+
 const EntryDetailPage = () => {
   const loaderData = useLoaderData<LoaderData>();
   const transition = useTransition();
+  const submit = useSubmit();
 
   if (transition.state !== "idle") {
     return <LoadingIndicator isFullScreen />;
@@ -84,6 +103,16 @@ const EntryDetailPage = () => {
               }}
             />
             <TextEditor initialData={entry.data.blocks} readOnly />
+            <Card title="🚨 Danger Zone" noText>
+              <div className="flex justify-center">
+                <Button
+                  color="error"
+                  onClick={() => submit({}, { method: "delete" })}
+                >
+                  Delete Entry
+                </Button>
+              </div>
+            </Card>
           </div>
         )}
       </div>

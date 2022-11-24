@@ -1,9 +1,11 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { EntryData, EntryLocation } from "~/types/entry";
 
+const ENTRIES_TABLE = "entries";
+
 export const getEntries = (client: SupabaseClient, userId: string) => {
   return client
-    .from("entries")
+    .from(ENTRIES_TABLE)
     .select("id, created_at, address, lat, lng, data")
     .filter("fk_user", "eq", userId);
 };
@@ -14,7 +16,7 @@ export const getEntry = (
   entryId: string
 ) => {
   return client
-    .from("entries")
+    .from(ENTRIES_TABLE)
     .select("id, created_at, address, lat, lng, data")
     .eq("id", entryId)
     .eq("fk_user", userId)
@@ -28,11 +30,15 @@ export const addEntry = (
   location: EntryLocation,
   userId: string
 ) => {
-  return client.from("entries").insert({
+  return client.from(ENTRIES_TABLE).insert({
     fk_user: userId,
     address: location.address,
     lat: location.lat,
     lng: location.lng,
     data,
   });
+};
+
+export const deleteEntry = (client: SupabaseClient, postId: string) => {
+  return client.from(ENTRIES_TABLE).delete().eq("id", postId);
 };
