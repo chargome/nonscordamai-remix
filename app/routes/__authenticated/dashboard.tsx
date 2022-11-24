@@ -10,12 +10,12 @@ interface LoaderData {
 }
 
 const DashboardPage = () => {
-  const user = useRouteData<LoaderData>(AUTHENTICATED_WRAPPER);
+  const routeData = useRouteData<LoaderData>(AUTHENTICATED_WRAPPER);
 
   return (
     <div className="flex min-h-screen flex-col items-center gap-8 py-20">
       <h1 className="pb-10 text-5xl font-bold">
-        Hello, {user?.user.user_metadata.name}
+        Hello, {routeData?.user.user_metadata.name}
       </h1>
       <EntryStats />
       <Link to={ADD_ENTRY}>
