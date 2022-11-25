@@ -42,3 +42,24 @@ export const addEntry = (
 export const deleteEntry = (client: SupabaseClient, postId: string) => {
   return client.from(ENTRIES_TABLE).delete().eq("id", postId);
 };
+
+export const getTotalEntryCount = (client: SupabaseClient, userId: string) => {
+  return client
+    .from(ENTRIES_TABLE)
+    .select("*", { count: "exact", head: true })
+    .eq("fk_user", userId);
+};
+
+export const getEntryCountByRange = (
+  client: SupabaseClient,
+  userId: string,
+  start: Date,
+  end: Date
+) => {
+  return client
+    .from(ENTRIES_TABLE)
+    .select("*", { count: "exact", head: true })
+    .eq("fk_user", userId)
+    .lt("created_at", end.toISOString())
+    .gt("created_at", start.toISOString());
+};
