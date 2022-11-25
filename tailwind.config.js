@@ -14,11 +14,13 @@ module.exports = {
       {
         light: {
           ...require("daisyui/src/colors/themes")["[data-theme=light]"],
-          primary: "#FBBD23",
+          primary: "#f6bd60",
+          secondary: "#81b29a",
         },
         dark: {
           ...require("daisyui/src/colors/themes")["[data-theme=dark]"],
-          primary: "#FBBD23",
+          primary: "#f6bd60",
+          secondary: "#81b29a",
         },
       },
     ],

@@ -38,7 +38,7 @@ export default function Index() {
           <div className="flex flex-col items-center gap-4 p-8 text-center">
             {TITLE}
             <Link to="/login">
-              <Button>GET STARTED</Button>
+              <Button color="secondary">GET STARTED</Button>
             </Link>
           </div>
         </Frame>

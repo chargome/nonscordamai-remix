@@ -67,6 +67,7 @@ const LoginPage = (): JSX.Element => {
         <Button
           type="submit"
           className="w-full"
+          color="primary"
           isDisabled={transition.state === "submitting"}
         >
           <Icons.Google className="h-5 w-5" />
@@ -78,6 +79,7 @@ const LoginPage = (): JSX.Element => {
         <Button
           onClick={() => {}}
           className="w-full"
+          color="primary"
           isDisabled={transition.state === "submitting"}
         >
           <Icons.Github className="h-5 w-5" />
