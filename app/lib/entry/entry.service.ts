@@ -46,7 +46,7 @@ export const deleteEntry = (client: SupabaseClient, postId: string) => {
 export const getTotalEntryCount = (client: SupabaseClient, userId: string) => {
   return client
     .from(ENTRIES_TABLE)
-    .select("*", { count: "exact", head: true })
+    .select("*", { count: "estimated", head: true })
     .eq("fk_user", userId);
 };
 
@@ -58,7 +58,7 @@ export const getEntryCountByRange = (
 ) => {
   return client
     .from(ENTRIES_TABLE)
-    .select("*", { count: "exact", head: true })
+    .select("*", { count: "estimated", head: true })
     .eq("fk_user", userId)
     .lt("created_at", end.toISOString())
     .gt("created_at", start.toISOString());
