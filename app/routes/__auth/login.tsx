@@ -38,7 +38,7 @@ export const action: ActionFunction = async ({
     const { data } = await supabaseClient.auth.signInWithOAuth({
       provider: provider as Provider,
       options: {
-        redirectTo: "http://localhost:3000/oauth/callback",
+        redirectTo: `https://nonscordamai.vercel.app/oauth/callback`,
       },
     });
 
