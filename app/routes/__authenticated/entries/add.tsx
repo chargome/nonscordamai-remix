@@ -1,7 +1,7 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useLoaderData, useSubmit } from "@remix-run/react";
+import { Link, useLoaderData, useSubmit } from "@remix-run/react";
 import AddEntrySteps from "~/components/AddEntrySteps";
 import { MY_ENTRIES } from "~/constants/routes";
 import { getAuthenticatedUser } from "~/lib/auth/auth.service";
@@ -65,7 +65,7 @@ const AddEntryPage = () => {
 
   return (
     <>
-      <div className="p-2 text-center text-xs bg-warning">⚠ WARNING: This repo is only a showcase for <a href="https://remix.run"><b>remix</b></a>, do not store any sensitive data in the app</div>
+      <div className="p-2 text-center text-xs bg-warning">⚠ WARNING: This repo is only a showcase for <a href="https://remix.run"><b>remix</b></a>, do not store any sensitive data in the app. For more information check out the <Link to="/gdpr" className="underline">privacy policy</Link>.</div>
       <div className="py-10 px-10">
         <h1 className="pb-10 text-end text-xl">Create a new Entry</h1>
         <AddEntrySteps googleKey={data.googleKey} saveEntry={saveEntry} />
