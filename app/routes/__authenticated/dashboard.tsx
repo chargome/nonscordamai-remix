@@ -68,7 +68,7 @@ const DashboardPage = () => {
 
   return (
     <div className="flex min-h-screen flex-col items-center gap-8 py-20">
-      <h1 className="pb-10 text-5xl font-bold">
+      <h1 className="pb-10 text-2xl md:text-5xl font-bold">
         Hello, {routeData?.user.user_metadata.name}
       </h1>
       <EntryStats
@@ -86,6 +86,7 @@ const DashboardPage = () => {
           <img
             src="/images/diary_2.webp"
             alt="Diary"
+            className="w-80"
           />
         </Frame>
       </div>
