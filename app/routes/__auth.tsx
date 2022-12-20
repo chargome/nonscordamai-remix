@@ -1,5 +1,4 @@
 import { Outlet } from "@remix-run/react";
-import Image from "remix-image";
 import { Frame } from "~/components/Frame";
 import { Logo } from "~/components/Logo";
 
@@ -13,7 +12,7 @@ const AuthLayout = (): JSX.Element => {
         </Frame>
       </div>
       <Frame className="relative z-0 -mt-20 h-full flex-1 lg:mt-0">
-        <Image
+        <img
           alt="Napoli"
           src={"/images/diary_3.webp"}
           className="absolute h-full w-full object-cover"
