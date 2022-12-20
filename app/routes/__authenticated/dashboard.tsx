@@ -2,7 +2,6 @@ import type { LoaderFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import type { User } from "@supabase/supabase-js";
-import Image from "remix-image";
 import Button from "~/components/Button";
 import EntryStats from "~/components/EntryStats";
 import { Frame } from "~/components/Frame";
@@ -69,7 +68,7 @@ const DashboardPage = () => {
 
   return (
     <div className="flex min-h-screen flex-col items-center gap-8 py-20">
-      <h1 className="pb-10 text-5xl font-bold">
+      <h1 className="pb-10 text-2xl md:text-5xl font-bold">
         Hello, {routeData?.user.user_metadata.name}
       </h1>
       <EntryStats
@@ -84,20 +83,10 @@ const DashboardPage = () => {
           </Button>
         </Link>
         <Frame className="z-0">
-          <Image
-            loaderUrl="/api/image"
+          <img
             src="/images/diary_2.webp"
             alt="Diary"
-            responsive={[
-              {
-                size: {
-                  width: 400,
-                  height: 400,
-                },
-                maxWidth: 200,
-              },
-            ]}
-            dprVariants={[1, 3]}
+            className="w-80"
           />
         </Frame>
       </div>
