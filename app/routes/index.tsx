@@ -43,6 +43,9 @@ export default function Index() {
           </div>
         </Frame>
       </div>
+      <div className="pt-10 text-sm text-right">
+        <Link to="/gdpr">Privacy policy</Link>
+      </div>
     </div>
   );
 }

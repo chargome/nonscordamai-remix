@@ -64,10 +64,13 @@ const AddEntryPage = () => {
   };
 
   return (
-    <div className="py-10 px-10">
-      <h1 className="pb-10 text-end text-xl">Create a new Entry</h1>
-      <AddEntrySteps googleKey={data.googleKey} saveEntry={saveEntry} />
-    </div>
+    <>
+      <div className="p-2 text-center text-xs bg-warning">⚠ WARNING: This repo is only a showcase for <a href="https://remix.run"><b>remix</b></a>, do not store any sensitive data in the app</div>
+      <div className="py-10 px-10">
+        <h1 className="pb-10 text-end text-xl">Create a new Entry</h1>
+        <AddEntrySteps googleKey={data.googleKey} saveEntry={saveEntry} />
+      </div>
+    </>
   );
 };
 
