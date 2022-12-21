@@ -1,7 +1,7 @@
 > **⚠ WARNING**: This repo is only a showcase for remix.run, do not store any sensitive data in the app
 # nonscordamai
 
-nonscordamai is a web based diary that stores your thoughts based on geo-location
+nonscordamai is a web based diary that stores your thoughts based on your geolocation
 
 
 ## technologies
